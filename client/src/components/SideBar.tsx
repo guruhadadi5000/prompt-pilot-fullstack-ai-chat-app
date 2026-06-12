@@ -3,14 +3,14 @@ import { useAppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
 import moment from "moment";
 
-export default function SideBar({ isMenuOpen, setIsMenuOpen }) {
+function SideBar({ isMenuOpen, setIsMenuOpen }) {
   const { user, chats, setSelectedChat, theme, setTheme, navigate } =
     useAppContext();
   const [search, setSearch] = useState("");
 
   return (
     <div
-      className={`flex flex-col h-screen min-w-72 p-5 dark:bg-linear-to-b from-[#242124]/30 to-[#000000]/30 border-r border-[#80609F]/30 backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1 ${isMenuOpen && "max-md:"}`}
+      className={`flex flex-col h-screen min-w-72 p-5 dark:bg-linear-to-b from-[#242124]/30 to-[#000000]/30 border-r border-[#80609F]/30 backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1 ${!isMenuOpen && "max-md:-translate-x-full"}`}
     >
       {/* Logo */}
       <img
@@ -24,7 +24,11 @@ export default function SideBar({ isMenuOpen, setIsMenuOpen }) {
       </button>
       {/* search chat */}
       <div className="flex items-center gap-2 p-3 mt-4 border border-gray-400 dark:border-white/20 rounded-md">
-        <img src={assets.search_icon} className="w-4 not-dark:invert" alt="" />
+        <img
+          src={assets.search_icon}
+          className="w-4 not-dark:invert"
+          alt="search"
+        />
         <input
           type="text"
           placeholder="Search chat"
@@ -45,6 +49,11 @@ export default function SideBar({ isMenuOpen, setIsMenuOpen }) {
           )
           .map((chat) => (
             <div
+              onClick={() => {
+                navigate("/");
+                setSelectedChat(chat);
+                setIsMenuOpen(false);
+              }}
               key={chat._id}
               className="p-2 px-4 dark:bg-[#57317C]/10 border border-gray-300 dark:border-[#80609F]/15 rounded-md cursor-pointer flex justify-between group"
             >
@@ -68,15 +77,16 @@ export default function SideBar({ isMenuOpen, setIsMenuOpen }) {
       </div>
       {/* community images */}
       <div
-        className="flex items-center gap-2 p-3 mt-4 border border-gray-300 
-      dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all
-      "
-        onClick={() => navigate("/community")}
+        onClick={() => {
+          navigate("/community");
+          setIsMenuOpen(false);
+        }}
+        className="flex items-center gap-2 p-3 mt-4 border border-gray-300  dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all"
       >
         <img
           src={assets.gallery_icon}
           className="w-4.5 not-dark:invert"
-          alt=""
+          alt="gallery"
         />
         <div className="flex flex-col text-sm ">
           <p>Community Images</p>
@@ -84,12 +94,17 @@ export default function SideBar({ isMenuOpen, setIsMenuOpen }) {
       </div>
       {/* Credit purchase option */}
       <div
-        className="flex items-center gap-2 p-3 mt-4 border border-gray-300 
-      dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all
-      "
-        onClick={() => navigate("/credits")}
+        onClick={() => {
+          navigate("/credits");
+          setIsMenuOpen(false);
+        }}
+        className="flex items-center gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all"
       >
-        <img src={assets.diamond_icon} className="w-4.5 dark:invert" alt="" />
+        <img
+          src={assets.diamond_icon}
+          className="w-4.5 dark:invert"
+          alt="dimond"
+        />
         <div className="flex flex-col text-sm ">
           <p>Credits : {user?.credits}</p>
           <p className="text-xs text-gray-400">
@@ -98,20 +113,19 @@ export default function SideBar({ isMenuOpen, setIsMenuOpen }) {
         </div>
       </div>
       {/* Dark mode Toggle */}
-      <div
-        className="flex items-center justify-between gap-2 p-3 mt-4 border border-gray-300 
-      dark:border-white/15 rounded-md 
-      "
-        onClick={() => navigate("/community")}
-      >
+      <div className="flex items-center justify-between gap-2 p-3 mt-4 border border-gray-300  dark:border-white/15 rounded-md ">
         <div className="flex items-center gap-2 text-sm">
-          <img src={assets.theme_icon} className="w-4 not-dark:invert" />
+          <img
+            src={assets.theme_icon}
+            className="w-4 not-dark:invert"
+            alt="theme"
+          />
           <p>Dark Mode</p>
         </div>
         <label className="relative inline-flex cursor-pointer">
           <input
             onChange={() =>
-              setTheme((theme) => (theme === "dark" ? "light" : "dark"))
+              setTheme(() => (theme === "dark" ? "light" : "dark"))
             }
             type="checkbox"
             className="sr-only peer"
@@ -147,3 +161,4 @@ export default function SideBar({ isMenuOpen, setIsMenuOpen }) {
     </div>
   );
 }
+export default SideBar;
