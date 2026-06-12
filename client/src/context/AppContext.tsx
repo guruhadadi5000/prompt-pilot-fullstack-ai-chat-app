@@ -40,6 +40,7 @@ export const AppContextProvider = ({ children }) => {
     } else {
       document.documentElement.classList.remove("dark");
     }
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const value = {
