@@ -1,12 +1,54 @@
 import { assets } from "../assets/assets";
 import moment from "moment";
-import { useEffect } from "react";
-import Markdown from "react-markdown";
+import { useEffect, useRef } from "react";
+import Markdown, { type Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Prism from "prismjs";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-tsx";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-json";
+import "prismjs/components/prism-bash";
+import "prismjs/components/prism-css";
+import "../assets/prism.css";
+import type { ChatMessage } from "../types/app";
 
-const Message = ({ message }) => {
+import "prismjs/components/prism-markdown";
+
+const markdownComponents: Components = {
+  pre({ children }) {
+    return <pre className="message-code-block">{children}</pre>;
+  },
+  code({ className, children, ...props }) {
+    const isBlock = /language-(\w+)/.test(className || "");
+
+    if (isBlock) {
+      return (
+        <code className={className} {...props}>
+          {String(children).replace(/\n$/, "")}
+        </code>
+      );
+    }
+
+    return (
+      <code className="message-inline-code" {...props}>
+        {children}
+      </code>
+    );
+  },
+};
+
+const Message = ({ message }: { message: ChatMessage }) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    Prism.highlightAll();
+    if (!contentRef.current) return;
+
+    contentRef.current
+      .querySelectorAll('code[class*="language-"]')
+      .forEach((block) => Prism.highlightElement(block));
   }, [message.content]);
 
   return (
@@ -31,11 +73,18 @@ const Message = ({ message }) => {
               referrerPolicy="no-referrer"
             />
           ) : (
-            <div className="text-sm dark:text-primary reset-tw">
-              <Markdown>{message.content}</Markdown>
+            <div
+              ref={contentRef}
+              className="message-markdown text-sm dark:text-primary"
+            >
+              <Markdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+                {message.content}
+              </Markdown>
             </div>
           )}
-          <span>{moment(message.timestamp).fromNow()}</span>
+          <span className="text-xs text-gray-400 dark:text-[#B1A6C0]">
+            {moment(message.timestamp).fromNow()}
+          </span>
         </div>
       )}
     </div>

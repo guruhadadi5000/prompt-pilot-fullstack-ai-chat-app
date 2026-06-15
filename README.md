@@ -16,14 +16,42 @@ A full-stack AI chat application with text and image generation, user authentica
 
 ## Tech Stack
 
-| Layer | Technologies |
-| --- | --- |
+| Layer    | Technologies                                        |
+| -------- | --------------------------------------------------- |
 | Frontend | React 19, Vite, Tailwind CSS 4, React Router, Axios |
-| Backend | Node.js, Express 5, TypeScript, MongoDB, Mongoose |
-| AI | Gemini API (OpenAI-compatible client) |
-| Media | ImageKit (upload + AI image generation) |
-| Payments | Stripe |
-| Auth | JWT, bcryptjs |
+| Backend  | Node.js, Express 5, TypeScript, MongoDB, Mongoose   |
+| AI       | Gemini API (OpenAI-compatible client)               |
+| Media    | ImageKit (upload + AI image generation)             |
+| Payments | Stripe                                              |
+| Auth     | JWT, bcryptjs                                       |
+
+## Screenshots
+
+Screenshots live in [`client/src/assets/readme-files/`](client/src/assets/readme-files/).
+
+### Home & chat
+
+![Home page](client/src/assets/readme-files/home_page.png)
+
+### Dark mode
+
+![Dark mode](client/src/assets/readme-files/dark_mode.png)
+
+### Code in chat responses
+
+![Chat with syntax-highlighted code block](client/src/assets/readme-files/chat_with_code_block.png)
+
+### AI image generation
+
+![AI image generation](client/src/assets/readme-files/ai_image_generation.png)
+
+### Community gallery
+
+![Community images](client/src/assets/readme-files/community_images.png)
+
+### Credit plans
+
+![Credit plans](client/src/assets/readme-files/credit_plans.png)
 
 ## Project Structure
 
@@ -121,40 +149,40 @@ All protected routes require an `Authorization` header with the JWT token.
 
 ### Users — `/api/users`
 
-| Method | Endpoint | Auth | Description |
-| --- | --- | --- | --- |
-| POST | `/register` | No | Register a new user |
-| POST | `/login` | No | Login and receive JWT |
-| GET | `/data` | Yes | Get current user profile |
-| GET | `/published-images` | No | Get community-published images |
+| Method | Endpoint            | Auth | Description                    |
+| ------ | ------------------- | ---- | ------------------------------ |
+| POST   | `/register`         | No   | Register a new user            |
+| POST   | `/login`            | No   | Login and receive JWT          |
+| GET    | `/data`             | Yes  | Get current user profile       |
+| GET    | `/published-images` | No   | Get community-published images |
 
 ### Chats — `/api/chat`
 
-| Method | Endpoint | Auth | Description |
-| --- | --- | --- | --- |
-| GET | `/create` | Yes | Create a new chat |
-| GET | `/get` | Yes | Get all user chats |
-| POST | `/delete` | Yes | Delete a chat |
+| Method | Endpoint  | Auth | Description        |
+| ------ | --------- | ---- | ------------------ |
+| GET    | `/create` | Yes  | Create a new chat  |
+| GET    | `/get`    | Yes  | Get all user chats |
+| POST   | `/delete` | Yes  | Delete a chat      |
 
 ### Messages — `/api/message`
 
-| Method | Endpoint | Auth | Description |
-| --- | --- | --- | --- |
-| POST | `/text` | Yes | Send a text prompt (1 credit) |
-| POST | `/image` | Yes | Generate an image (2 credits) |
+| Method | Endpoint | Auth | Description                   |
+| ------ | -------- | ---- | ----------------------------- |
+| POST   | `/text`  | Yes  | Send a text prompt (1 credit) |
+| POST   | `/image` | Yes  | Generate an image (2 credits) |
 
 ### Credits — `/api/credit`
 
-| Method | Endpoint | Auth | Description |
-| --- | --- | --- | --- |
-| GET | `/plan` | No | List available credit plans |
-| POST | `/purchase` | Yes | Start Stripe checkout |
+| Method | Endpoint    | Auth | Description                 |
+| ------ | ----------- | ---- | --------------------------- |
+| GET    | `/plan`     | No   | List available credit plans |
+| POST   | `/purchase` | Yes  | Start Stripe checkout       |
 
 ### Webhooks
 
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| POST | `/api/stripe` | Stripe payment webhook |
+| Method | Endpoint      | Description            |
+| ------ | ------------- | ---------------------- |
+| POST   | `/api/stripe` | Stripe payment webhook |
 
 ## Deployment (Vercel)
 
@@ -162,30 +190,30 @@ Deploy the **frontend** and **backend** as two separate Vercel projects from the
 
 ### Backend
 
-| Setting | Value |
-| --- | --- |
-| Root Directory | `server` |
-| Build Command | (default — uses `vercel.json`) |
+| Setting               | Value                            |
+| --------------------- | -------------------------------- |
+| Root Directory        | `server`                         |
+| Build Command         | (default — uses `vercel.json`)   |
 | Environment Variables | All variables from `server/.env` |
 
 The server exports the Express app for Vercel serverless and uses `.js` extensions on relative imports for ESM compatibility.
 
 ### Frontend
 
-| Setting | Value |
-| --- | --- |
-| Root Directory | `client` |
-| Build Command | `npm run build` |
-| Output Directory | `dist` |
+| Setting               | Value                                             |
+| --------------------- | ------------------------------------------------- |
+| Root Directory        | `client`                                          |
+| Build Command         | `npm run build`                                   |
+| Output Directory      | `dist`                                            |
 | Environment Variables | `VITE_SERVER_URL=https://your-backend.vercel.app` |
 
 ## Credits
 
-| Action | Cost |
-| --- | --- |
-| Text message | 1 credit |
-| Image generation | 2 credits |
-| New user signup | 20 credits (free) |
+| Action           | Cost              |
+| ---------------- | ----------------- |
+| Text message     | 1 credit          |
+| Image generation | 2 credits         |
+| New user signup  | 20 credits (free) |
 
 Credit plans can be purchased via Stripe on the `/credits` page.
 

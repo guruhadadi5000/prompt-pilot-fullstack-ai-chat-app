@@ -73,7 +73,7 @@ function SideBar({ isMenuOpen, setIsMenuOpen }: ISideBarProps) {
       {/* new chat button */}
       <button
         onClick={createNewChat}
-        className="flex justify-center items-center w-full py-2 mt-10 text-white bg-linear-to-r from-[#A456F7] to-[#3D81F6] text-sm rounded-md cursor-pointer"
+        className="flex justify-center items-center w-full py-2 mt-10 text-white bg-linear-to-r from-[#232b3498] to-[#323955] text-sm rounded-md cursor-pointer"
       >
         <span className="mr-2 text-xl">+</span> New Chat
       </button>
@@ -179,7 +179,7 @@ function SideBar({ isMenuOpen, setIsMenuOpen }: ISideBarProps) {
         <div className="flex items-center gap-2 text-sm">
           <img
             src={assets.theme_icon}
-            className="w-4 not-dark:invert"
+            className="w-4 brightness-0 not-dark:invert"
             alt="theme"
           />
           <p>Dark Mode</p>
@@ -193,14 +193,18 @@ function SideBar({ isMenuOpen, setIsMenuOpen }: ISideBarProps) {
             className="sr-only peer"
             checked={theme === "dark"}
           />
-          <div className="w-9 h-5 bg-gray-400 rounded-full peer-checked:bg-purple-600 transition-all"></div>
+          <div className="w-9 h-5 bg-gray-400 rounded-full peer-checked:bg-gray-600 dark:peer-checked:bg-gray-500 transition-all"></div>
           <span className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform peer-checked:translate-x-4"></span>
         </label>
       </div>
 
       {/* User Account */}
       <div className="flex items-center gap-3 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer group">
-        <img src={assets.user_icon} alt="user" className="w-7 rounded-full" />
+        <img
+          src={assets.user_icon}
+          alt="user"
+          className="w-7 rounded-full bg-zinc-100 ring-1 ring-zinc-300 dark:bg-slate-700 dark:ring-2 dark:ring-slate-400/50"
+        />
         <p className="flex-1 text-sm dark:text-primary truncate">
           {user ? user.name : "Login your account"}
         </p>

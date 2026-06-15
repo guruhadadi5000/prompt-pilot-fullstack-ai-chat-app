@@ -16,6 +16,49 @@
   display: none;
 }
 
-.reset-tw :not(pre):not(code) {
-  all: revert;
+.message-markdown p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.message-markdown ul,
+.message-markdown ol {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+}
+
+.message-markdown li {
+  margin: 0.25rem 0;
+}
+
+.message-inline-code {
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: rgb(0 0 0 / 0.06);
+}
+
+.dark .message-inline-code {
+  background: rgb(255 255 255 / 0.1);
+}
+
+.message-code-block {
+  margin: 0.75rem 0 !important;
+  border-radius: 0.5rem !important;
+  overflow-x: auto !important;
+  max-width: 100%;
+}
+
+.message-markdown pre code {
+  font-family: Menlo, Monaco, Consolas, monospace !important;
+  white-space: pre !important;
+  word-break: normal !important;
+}
+
+.loader div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader div:nth-child(3) {
+  animation-delay: 0.4s;
 }
