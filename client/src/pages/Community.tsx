@@ -2,34 +2,31 @@ import { useEffect, useState } from "react";
 import Loading from "./Loading";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
-import { dummyPublishedImages } from "../assets/assets";
 
 const Community = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // const { axios } = useAppContext();
+  const { axios } = useAppContext();
 
-  // const fetchImages = async () => {
-  //   try {
-  //     const { data } = await axios.get("/api/user/published-images");
+  const fetchImages = async () => {
+    try {
+      const { data } = await axios.get("/api/users/published-images");
 
-  //     if (data.success) {
-  //       setImages(data.images);
-  //     } else {
-  //       toast.error(data.message);
-  //     }
-  //   } catch (error) {
-  //     toast.error(error.message);
-  //   }
+      if (data.success) {
+        setImages(data.images);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
 
-  //   setLoading(false);
-  // };
+    setLoading(false);
+  };
 
   useEffect(() => {
-    // fetchImages();
-    setImages(dummyPublishedImages);
-    setLoading(false);
+    fetchImages();
   }, []);
 
   if (loading) return <Loading />;

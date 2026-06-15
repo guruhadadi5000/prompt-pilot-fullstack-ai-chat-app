@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Loading from "./Loading";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
-import { dummyPlans } from "../assets/assets";
 
 const Credits = () => {
   const [plans, setPlans] = useState([]);
@@ -11,19 +10,19 @@ const Credits = () => {
   const { token, axios } = useAppContext();
 
   const fetchPlans = async () => {
-    // try {
-    //   const { data } = await axios.get("/api/credit/plan", {
-    //     headers: { Authorization: token },
-    //   });
-    //   if (data.success) {
-    //     setPlans(data.plans);
-    //   } else {
-    //     toast.error(data.message || "Failed to fetch plans.");
-    //   }
-    // } catch (error) {
-    //   toast.error(error.message);
-    // }
-    // setLoading(false);
+    try {
+      const { data } = await axios.get("/api/credit/plan", {
+        headers: { Authorization: token },
+      });
+      if (data.success) {
+        setPlans(data.plans);
+      } else {
+        toast.error(data.message || "Failed to fetch plans.");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+    setLoading(false);
   };
 
   const purchasePlan = async (planId) => {
@@ -47,9 +46,7 @@ const Credits = () => {
   };
 
   useEffect(() => {
-    // fetchPlans();
-    setPlans(dummyPlans);
-    setLoading(false);
+    fetchPlans();
   }, []);
 
   if (loading) return <Loading />;

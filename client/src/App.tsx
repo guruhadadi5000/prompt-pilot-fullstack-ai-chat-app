@@ -8,18 +8,20 @@ import { assets } from "./assets/assets";
 import Loading from "./pages/Loading";
 import Login from "./pages/Login";
 import { useAppContext } from "./context/AppContext";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
-  const { user } = useAppContext();
+  const { user, loadingUser } = useAppContext();
 
-  if (pathname === "/loading") {
+  if (pathname === "/loading" || loadingUser) {
     return <Loading />;
   }
 
   return (
     <>
+      <Toaster />
       {!isMenuOpen && (
         <img
           onClick={() => setIsMenuOpen(true)}

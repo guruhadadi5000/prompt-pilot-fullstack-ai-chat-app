@@ -28,8 +28,7 @@ export const textMessageController = async (req, res) => {
     });
 
     const { choices } = await openai.chat.completions.create({
-      // deliberately using a dummy model to avoid API key usage
-      model: "gemini-2.5-flash-lite-dummy",
+      model: "gemini-2.5-flash-lite",
       messages: [
         {
           role: "user",
@@ -101,13 +100,20 @@ export const imageMessageController = async (req, res) => {
     // Upload to ImageKit Media Library
     const uploadResponse = await imagekit.files.upload({
       file: base64Image,
-      fileName: `promptpilot/${Date.now()}.png`,
+      fileName: `${Date.now()}.png`,
       folder: "promptpilot",
+      isPublished: isPublished ?? true,
     });
+
+    const imageUrl =
+      uploadResponse.url ??
+      (uploadResponse.filePath
+        ? `${process.env.IMAGEKIT_URL}${uploadResponse.filePath}`
+        : generatedImageUrl);
 
     const reply = {
       role: "assistant",
-      content: uploadResponse.url,
+      content: imageUrl,
       timestamp: Date.now(),
       isImage: true,
       isPublished,

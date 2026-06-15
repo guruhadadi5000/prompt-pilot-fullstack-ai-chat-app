@@ -26,8 +26,9 @@ const Message = ({ message }) => {
           {message.isImage ? (
             <img
               src={message.content}
-              alt="content"
+              alt="Generated image"
               className="w-full max-w-md mt-2 rounded-md"
+              referrerPolicy="no-referrer"
             />
           ) : (
             <div className="text-sm dark:text-primary reset-tw">
