@@ -1,4 +1,4 @@
-import Chat from "../models/Chat";
+import Chat from "../models/Chat.js";
 
 // API Controller for creating a new chat
 export const createChat = async (req, res) => {

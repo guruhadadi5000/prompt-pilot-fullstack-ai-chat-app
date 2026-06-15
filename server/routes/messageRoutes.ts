@@ -1,9 +1,9 @@
 import express from "express";
-import { protect } from "../middlewares/auth";
+import { protect } from "../middlewares/auth.js";
 import {
   imageMessageController,
   textMessageController,
-} from "../controllers/messageController";
+} from "../controllers/messageController.js";
 
 const messageRouter = express.Router();
 

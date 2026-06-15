@@ -1,12 +1,12 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
-import connectDB from "./configs/db";
-import userRouter from "./routes/userRouter";
-import chatRouter from "./routes/chatRoutes";
-import messageRouter from "./routes/messageRoutes";
-import creditRouter from "./routes/creditRoutes";
-import { stripeWebhooks } from "./controllers/webhooks";
+import connectDB from "./configs/db.js";
+import userRouter from "./routes/userRouter.js";
+import chatRouter from "./routes/chatRoutes.js";
+import messageRouter from "./routes/messageRoutes.js";
+import creditRouter from "./routes/creditRoutes.js";
+import { stripeWebhooks } from "./controllers/webhooks.js";
 const app = express();
 
 app.use(express.json());
@@ -31,6 +31,10 @@ app.use("/api/chat", chatRouter);
 app.use("/api/message", messageRouter);
 app.use("/api/credit", creditRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+export default app;
+
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
