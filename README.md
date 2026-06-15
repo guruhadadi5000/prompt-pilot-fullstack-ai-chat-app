@@ -68,7 +68,7 @@ A full-stack AI chat application with text and image generation, user authentica
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone git@github.com:guruhadadi5000/prompt-pilot-fullstack-ai-chat-app.git
 cd PromptPilot
 ```
 
