@@ -1,12 +1,13 @@
 import express from "express";
-import dotenv from "dotenv";
+import "dotenv/config";
 import cors from "cors";
 import connectDB from "./configs/db";
 import userRouter from "./routes/userRouter";
+import chatRouter from "./routes/chatRoutes";
+import messageRouter from "./routes/messageRoutes";
 const app = express();
 
 app.use(express.json());
-dotenv.config();
 await connectDB();
 app.use(cors());
 
@@ -18,6 +19,8 @@ app.get("/", (_, res) => {
 });
 
 app.use("/api/users", userRouter);
+app.use("/api/chat", chatRouter);
+app.use("/api/message", messageRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
