@@ -77,7 +77,7 @@ const Login = () => {
           Already have account?{" "}
           <span
             onClick={() => setState("login")}
-            className="text-blue-500 hover:text-blue-600 transition-all cursor-pointer font-bold"
+            className="text-blue-500 hover:text-blue-600 transition-all cursor-pointer"
           >
             click here
           </span>
@@ -87,7 +87,7 @@ const Login = () => {
           Create an account?{" "}
           <span
             onClick={() => setState("register")}
-            className="text-gray-700 cursor-pointer"
+            className="text-blue-500 hover:text-blue-600 transition-all cursor-pointer"
           >
             click here
           </span>

@@ -27,50 +27,33 @@ A full-stack AI chat application with text and image generation, user authentica
 
 ## Screenshots
 
-Screenshots live in [`client/src/assets/readme-files/`](client/src/assets/readme-files/).
-
 ### Home & chat
 
-![Home page](client/src/assets/readme-files/home_page.png)
+## ![Home page](client/src/assets/readme-files/home_page.png)
+
+---
 
 ### Dark mode
 
 ![Dark mode](client/src/assets/readme-files/dark_mode.png)
 
-### Code in chat responses
+---
 
-![Chat with syntax-highlighted code block](client/src/assets/readme-files/chat_with_code_block.png)
+### AI prompt response (formatted text)
+
+## ![Chat with syntax-highlighted code block](client/src/assets/readme-files/chat_with_code_block.png)
+
+---
 
 ### AI image generation
 
-![AI image generation](client/src/assets/readme-files/ai_image_generation.png)
+## ![AI image generation](client/src/assets/readme-files/ai_image_generation.png)
 
-### Community gallery
-
-![Community images](client/src/assets/readme-files/community_images.png)
+---
 
 ### Credit plans
 
 ![Credit plans](client/src/assets/readme-files/credit_plans.png)
-
-## Project Structure
-
-```
-PromptPilot/
-├── client/          # React frontend (Vite)
-│   ├── src/
-│   │   ├── components/   # ChatBox, SideBar, Message, etc.
-│   │   ├── context/      # AppContext (auth, chats, theme)
-│   │   └── pages/        # Login, Credits, Community, Loading
-│   └── vercel.json
-└── server/          # Express API
-    ├── configs/     # DB, OpenAI/Gemini, ImageKit
-    ├── controllers/
-    ├── middlewares/
-    ├── models/
-    ├── routes/
-    └── vercel.json
-```
 
 ## Prerequisites
 
