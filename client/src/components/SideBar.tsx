@@ -4,7 +4,12 @@ import { assets } from "../assets/assets";
 import moment from "moment";
 import toast from "react-hot-toast";
 
-function SideBar({ isMenuOpen, setIsMenuOpen }) {
+interface ISideBarProps {
+  isMenuOpen: boolean;
+  setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function SideBar({ isMenuOpen, setIsMenuOpen }: ISideBarProps) {
   const {
     user,
     chats,
@@ -27,7 +32,10 @@ function SideBar({ isMenuOpen, setIsMenuOpen }) {
     toast.success("Logged out successfully");
   };
 
-  const deleteChat = async (e, chatId) => {
+  const deleteChat = async (
+    e: React.MouseEvent<HTMLImageElement>,
+    chatId: string,
+  ) => {
     try {
       e.stopPropagation();
       const confirm = window.confirm(
